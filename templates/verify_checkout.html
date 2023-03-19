@@ -1,0 +1,126 @@
+{% extends "base.html" %} 
+{% block content %}
+<!-- <button type="button" id="createCheckout">Checkout</button> -->
+
+<main style="margin-block-start: 100px;">
+  <div class="container wow fadeIn">
+    <h2 class=" mt-5 my-3 h4 text-center" style="font-family: Poppins; font-weight: 500;">Verify Order</h2>
+    <!-- <h2 class="my-5 h2 text-center">Verify Order</h2> -->
+    <div class="row">
+      <div class="col-md-8 mb-4 ">
+        <div class="card p-4">
+            <h3 style="color: #820000; font-size: 20px;">Shipping address</h3>
+
+            <h1>{{order.}}</h1>
+            <div>
+              <div class="md-form mb-2">
+                <div class="" style="font-weight: 600;">Address</div>
+                <div>{{order.shipping_address.street_address}}
+                </div>
+              </div>
+
+              <div class="md-form mb-3">   
+                <div class="" style="font-weight: 600;">Apartment Details</div>
+                {% if order.shipping_address.apartment_address %}
+                <div>{{order.shipping_address.apartment_address}}</div>
+                {% else %}
+                <div>-</div>
+                {% endif %}
+              </div>
+
+
+              <div class="row">
+                <div class="col-lg-4 col-md-12 mb-4">
+                  <div style="font-weight: 600;">Country</div>
+                  <div>{{order.shipping_address.country}}</div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                  <div style="font-weight: 600;">Zip</div>
+                  <div>{{order.shipping_address.zip}}</div>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+
+            <h3 style="color: #820000; font-size: 20px;">Billing address</h3>
+
+            <div class="">
+              <div class="md-form mb-2">
+                <div  style="font-weight: 600;" class="">Address</div>
+                <div>{{order.billing_address.street_address}}</div>
+              </div>
+
+              <div class="md-form mb-3">
+                <div class="" style="font-weight: 600;"
+                  >Apartment Details
+                  </div>
+                  {% if order.billing_address.apartment_address %}
+                  <div>{{order.billing_address.apartment_address}}</div>
+                  {% else %}
+                <div>-</div>
+                {% endif %}
+              </div>
+
+              <div class="row">
+                <div class="col-lg-4 col-md-12 mb-4">
+                  <div style="font-weight: 600;" for="country">Country</div>
+                  <div>{{order.billing_address.country}}</div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 mb-4">
+                  <div style="font-weight: 600;">Zip</div>
+                  <div >{{order.billing_address.zip}}</div>
+                </div>
+              </div>
+            </div>
+            <hr />
+
+            <!-- <h3>Payment option</h3>
+  
+                <div class="d-block my-3">
+                  {% for value, name in form.fields.payment_option.choices %}
+                  <div class="custom-control custom-radio">
+                    <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input" required>
+                    <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
+                  </div>
+                  {% endfor %}
+                </div> -->
+
+            <!-- <hr class="mb-4" /> -->
+            <script>
+              function loader(){
+                let paymentBtn = $('#createCheckout');
+                let loadingBtn = $('#loadingBtn');
+
+                paymentBtn.addClass("d-none");
+                loadingBtn.removeClass("d-none")
+              }
+              
+        </script>
+            <button class="btn btn-primary btn-lg btn-block"
+             type="button" id="createCheckout" onclick="loader()">
+              Proceed to payment
+            </button>
+            <button class="btn btn-primary btn-lg btn-block d-none" type="button" id="loadingBtn">
+              <span
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </form>
+       
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">{% include "order_snippet.html" %}</div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+
+
+
+{% endblock %}

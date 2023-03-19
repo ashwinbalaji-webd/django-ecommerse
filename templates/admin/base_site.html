@@ -1,0 +1,16 @@
+{% extends 'admin/base_site.html' %}
+ {% load static %}
+{% block branding %}
+<a href="{% url 'core:home' %}" id="head">Photopark</a>
+{% endblock %} 
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+  <!-- poppins -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <!-- monserraat = card title (item name) -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+{% endblock %}
+

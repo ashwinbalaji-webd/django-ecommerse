@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <main class="" style="margin-bottom: 130px;">
+    <div class="container ">
+
+    <div class="table-responsive text-nowrap pt-5">
+    <h2>Orders</h2>
+    {% if order_items %}
+    <table class="table">
+        <thead>
+        <tr class="text-center">
+            <th scope="col">#</th>
+            <th scope="col">Item title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Gross Price</th>
+            <th scope="col">Net Price</th>
+            <th scope="col">Ordered On</th>
+            <th scope = "col">Delivery Address</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for order_item in order_items %}
+        <tr class="text-center">
+            <th scope="row">{{ forloop.counter }}</th>
+        {% for items in order_item.items.all %}
+            <td>{{ items.item.title }}</td>
+            <td>{{ items.item.price }}</td>
+            <td>
+                {{ items.quantity }}
+            </td>
+            <td style="font-family: Monserrat;font-size: 16px;">₹ {{ items.get_total_item_price }}</td>
+            <td style=" 
+            font-family: Montserrat;
+            font-size: 16px;
+        "
+        >
+            {% if items.item.discount_price %}
+            ₹ {{ items.get_total_discount_item_price }}
+            {% else %}
+                ${{ items.get_total_item_price }}
+            {% endif %}
+
+            </td>
+            <!-- <td>₹ {{ order_item.get_final_price }}</td> -->
+            <td style=" 
+            font-family: Montserrat;
+            font-size: 16px;
+        ">{{ items.ordered_date }}</td>
+        <td>
+            <span>
+            {% if order_item.order.shipping_address.street_address %}
+            {{ order_item.order.shipping_address.street_address}}<br>
+            {% endif %}
+
+            {% if order_item.order.shipping_address.apartment_address %}
+            {{ order_item.order.shipping_address.apartment_address}}<br>
+            {% endif %}
+
+            {% if order_item.order.shipping_address.zip %}
+            {{ order_item.order.shipping_address.zip}}<br>
+            {% endif %}
+
+            <!-- {% if order_item.order.shipping_address.country %}
+            {{ order_item.order.shipping_address.country}}
+            {% endif %} -->
+
+            </span>
+        </td>
+
+        </tr>
+        {% endfor %}
+        {% endfor %}
+
+        {% if object.get_total %}
+        <tr class= "">
+            <td colspan="5" style="padding-left: 24px;"><b>Order Total</b></td>
+            <td class="" style="text-align: center; font-weight: 700;"><b>${{ object.get_total }}</b></td>
+        </tr>
+        <tr>
+            <td colspan="6">
+            <a class='btn btn-primary float-right' href='/'>Return to shop</a>
+            </td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    {% else %}
+    <div>
+        <div class="empty-state">
+       <div class="empty-state__content">
+         <div class="empty-state__icon">
+           <img src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-626.jpg?size=626&ext=jpg&ga=GA1.2.879045405.1675969669&semt=ais" alt="">
+         </div>
+         <div class="empty-state__message">No Orders yet</div>
+         <div class="empty-state__help">
+       
+         </div>
+       </div>
+     </div>
+   </div>
+   <div class="text-center">
+       <a class='btn btn-primary ' style="color: aliceblue;" href='/'>Return to Shop</a>
+   </div>
+
+    {% endif %}
+    </div>
+
+    </div>
+  </main>
+
+{% endblock content %}
+
+

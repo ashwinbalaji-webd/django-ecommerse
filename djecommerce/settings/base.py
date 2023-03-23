@@ -1,5 +1,7 @@
 import os
+import mimetypes
 from decouple import config
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
@@ -67,6 +69,8 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+mimetypes.add_type('text/css', '.css', True)
+
 
 # Auth
 
@@ -85,6 +89,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 # stripe keys
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51MTQKiSHhGZ8z28p8rAmkq5fNozUsZV4mZ81f32bmb6cjngm6D3IoMGfI3613bsvLAgWlaU4Xv7Z39mMjC6yC6Lf00BKQEJKNi'
-STRIPE_SECRET_KEY = 'sk_test_51MTQKiSHhGZ8z28pyWr3PPJggbejxWUZxIUcnQflpK6E6rDD3cMCZPIt9k0sThnELeJswgQ9DO1514LfOkJ8sMDM00aCJ3ookS'
+STRIPE_PUBLISHABLE_KEY = config('STRIPE_TEST_PUBLIC_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_TEST_SECRET_KEY')
 
